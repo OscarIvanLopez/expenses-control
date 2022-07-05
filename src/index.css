@@ -348,6 +348,7 @@ main {
   top: 3rem;
   width: 3rem;
   height: 3rem;
+  cursor: pointer;
 }
 .modal .cerrar-modal img {
   width: 100%;
@@ -368,7 +369,7 @@ body .modal {
   overflow: hidden;
 }
 
-.modal .formulario .animar {
+.modal .formulario.animar {
   position: relative;
   opacity: 1;
 }
