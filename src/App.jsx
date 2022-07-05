@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
+import Filters from "./components/Filters";
 import ExpensesList from "./components/ExpensesList";
 import Modal from "./components/Modal";
 import { generateID } from "./helpers";
@@ -22,6 +23,8 @@ const App = () => {
 
   const [spentEdit, setSpentEdit] = useState({});
 
+  const [filter, setFilter] = useState("");
+
   // this effect validate if the users is editing a spent
   useEffect(() => {
     if (Object.keys(spentEdit).length > 0) {
@@ -41,6 +44,17 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses) ?? []);
   }, [expenses]);
+
+  useEffect(() => {
+    if (filter) {
+      // filter by category
+      const filteredExpenses = expenses.filter(
+        (spent) => spent.category === filter
+      );
+
+      console.log(filteredExpenses);
+    }
+  }, [filter]);
 
   // This effect validate if are a saved budget on local storage
   useEffect(() => {
@@ -99,6 +113,7 @@ const App = () => {
       {isValidBudget && (
         <>
           <main>
+            <Filters filter={filter} setFilter={setFilter} />
             <ExpensesList
               expenses={expenses}
               setSpentEdit={setSpentEdit}
