@@ -24,6 +24,7 @@ const App = () => {
   const [spentEdit, setSpentEdit] = useState({});
 
   const [filter, setFilter] = useState("");
+  const [filteredExpenses, setfilteredExpenses] = useState({});
 
   // this effect validate if the users is editing a spent
   useEffect(() => {
@@ -45,6 +46,7 @@ const App = () => {
     localStorage.setItem("expenses", JSON.stringify(expenses) ?? []);
   }, [expenses]);
 
+  // this effect filter the expenses
   useEffect(() => {
     if (filter) {
       // filter by category
@@ -52,7 +54,7 @@ const App = () => {
         (spent) => spent.category === filter
       );
 
-      console.log(filteredExpenses);
+      setfilteredExpenses(filteredExpenses);
     }
   }, [filter]);
 
@@ -105,6 +107,7 @@ const App = () => {
     <div className={modal && "fijar"}>
       <Header
         expenses={expenses}
+        setExpenses={setExpenses}
         budget={budget}
         setBudget={setBudget}
         isValidBudget={isValidBudget}
@@ -118,6 +121,8 @@ const App = () => {
               expenses={expenses}
               setSpentEdit={setSpentEdit}
               deleteSpent={deleteSpent}
+              filter={filter}
+              filteredExpenses={filteredExpenses}
             />
           </main>
           <div className="nuevo-gasto">

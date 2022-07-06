@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 
 const Filters = ({ filter, setFilter }) => {
   return (
@@ -7,7 +6,7 @@ const Filters = ({ filter, setFilter }) => {
         <div className="campo">
           <legend>Filter Expenses</legend>
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="select">-- Select</option>
+            <option value="select">-- All Categories</option>
             <option value="saving">-- Saving</option>
             <option value="food">-- Food</option>
             <option value="house">-- House</option>
